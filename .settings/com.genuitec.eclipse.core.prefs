@@ -1,0 +1,4 @@
+#Sat Mar 05 09:44:55 CST 2016
+eclipse.preferences.version=1
+validator.Checked=WebRoot/WEB-INF/paper/blog/home.jsp,WebRoot/js,WebRoot/WEB-INF/jsps/home.jsp
+validator.Unchecked=

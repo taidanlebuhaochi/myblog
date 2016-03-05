@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 
+'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<!-- namespace命名空间，作用就是对sql进行类化管理，相当于sql隔离 -->
+<mapper namespace="com.houmingjian.blog.mapper.custom.BlogUserMapperCustom">
+	<!-- Check Account -->
+	<select id="getBlogUserByAcPwd" resultType="BlogUser" parameterType="BlogUser">
+		SELECT * FROM blog_user WHERE email=#{email} and password=#{password} 
+	</select>
+</mapper>

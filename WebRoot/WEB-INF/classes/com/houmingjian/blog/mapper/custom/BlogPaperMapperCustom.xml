@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 
+'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<!-- namespace命名空间，作用就是对sql进行类化管理，相当于sql隔离 -->
+<mapper namespace="com.houmingjian.blog.mapper.custom.BlogPaperMapperCustom">
+	<resultMap type="BlogPaperCustom" id="BlogPaperCustomLazyResultMap" extends="com.houmingjian.blog.mapper.BlogPaperMapper.BaseResultMap">
+		<association property="tagDomain" javaType="com.houmingjian.blog.domain.BlogTag" select="com.houmingjian.blog.mapper.BlogTagMapper.selectByPrimaryKey" column="tag"></association>
+	</resultMap>
+
+	<!-- Get Limit Blog -->
+	<select id="getLimitBlogPaper" resultMap="BlogPaperCustomLazyResultMap" parameterType="Page">
+		SELECT * FROM blog_paper order by createtime desc LIMIT #{startIndex},#{pageSize} 
+	</select>
+	
+	<!-- Get One Blog Paper -->
+	<select id="getBlogPaperById" resultMap="BlogPaperCustomLazyResultMap" parameterType="int">
+		SELECT * FROM blog_paper WHERE id=#{id}
+	</select>
+	
+	<!-- Get One Blog Paper Count -->
+	<select id="getBlogPaperCount" resultType="int">
+		SELECT count(*) FROM blog_paper
+	</select>
+	
+	<!-- Get Limit Blog By Tag -->
+	<select id="getLimitBlogByTag" resultMap="BlogPaperCustomLazyResultMap" parameterType="BlogPaperQueryVo">
+		SELECT * FROM blog_paper WHERE tag=#{tag} ORDER BY createtime desc LIMIT #{page.startIndex},#{page.pageSize} 
+	</select>
+	
+	<!-- Get Last Blog Paper Time -->
+	<select id="getLastPaperTime" resultType="date">
+		SELECT MIN(createtime) FROM blog_paper ORDER BY createtime
+	</select>
+	
+	<!-- Get Month Paper -->
+	<select id="getLimitBlogByHistory" resultMap="BlogPaperCustomLazyResultMap" parameterType="BlogPaperQueryVo">
+		SELECT * FROM blog_paper WHERE createtime LIKE "%"#{day}"%" ORDER BY createtime LIMIT #{page.startIndex},#{page.pageSize}
+	</select>
+	
+	<!-- Get Month Paper Count -->
+	<select id="getMonthPaperCount" resultType="int" parameterType="string">
+		SELECT count(*) FROM blog_paper WHERE createtime LIKE "%"#{day}"%"
+	</select>
+	
+	<!-- Get Blog Paper Count By Tag -->
+	<select id="getBlogPaperCountByTag" resultType="int" parameterType="int">
+		SELECT count(*) FROM blog_paper WHERE tag=#{tagId}
+	</select>
+</mapper>

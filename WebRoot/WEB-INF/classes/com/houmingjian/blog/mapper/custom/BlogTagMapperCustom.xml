@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN' 
+'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<!-- namespace命名空间，作用就是对sql进行类化管理，相当于sql隔离 -->
+<mapper namespace="com.houmingjian.blog.mapper.custom.BlogTagMapperCustom">
+	<!-- Get All Tag -->
+	<select id="getAllTag" resultType="BlogTag">
+		SELECT * FROM blog_tag
+	</select>
+</mapper>
